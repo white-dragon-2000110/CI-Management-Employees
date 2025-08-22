@@ -11,6 +11,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
+        .logoutindex{
+            z-index: 10000;
+        }
         .navbar-brand {
             font-weight: bold;
             color: #2c3e50 !important;
@@ -966,7 +969,7 @@
                             <i class="fas fa-user me-1"></i><?php echo $this->session->userdata('user_name') ?: 'User'; ?>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/auth/logout"><i class="fas fa-sign-out-alt me-1"></i>Logout</a></li>
+                            <li><a class="dropdown-item" href="/auth/logout"><i class="fas fa-sign-out-alt me-1 z-index"></i>Logout</a></li>
                         </ul>
                     </li>
                 </ul>

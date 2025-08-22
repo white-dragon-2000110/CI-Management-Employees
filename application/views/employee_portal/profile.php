@@ -112,6 +112,15 @@
                         </div>
                         
                         <div class="profile-body">
+                            <!-- Flash Messages -->
+                            <?php if ($this->session->flashdata('toast_message')): ?>
+                                <div class="alert alert-<?php echo $this->session->flashdata('toast_type') === 'error' ? 'danger' : ($this->session->flashdata('toast_type') === 'warning' ? 'warning' : 'success'); ?> alert-dismissible fade show" role="alert">
+                                    <i class="fas fa-<?php echo $this->session->flashdata('toast_type') === 'error' ? 'exclamation-triangle' : ($this->session->flashdata('toast_type') === 'warning' ? 'exclamation-triangle' : 'check-circle'); ?> me-2"></i>
+                                    <?php echo $this->session->flashdata('toast_message'); ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
+                            
                             <!-- Employee Information -->
                             <div class="row mb-4">
                                 <div class="col-md-6">

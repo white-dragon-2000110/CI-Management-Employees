@@ -14,8 +14,13 @@ class Employee_portal extends CI_Controller {
         // Create uploads directory if it doesn't exist
         $upload_dir = APPPATH . '../uploads/employee_photos/';
         if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0755, true);
+            if (!mkdir($upload_dir, 0755, true)) {
+                log_message('error', 'Failed to create uploads directory: ' . $upload_dir);
+            }
         }
+        
+        // Enable error logging
+        log_message('info', 'Employee_portal controller initialized');
     }
     
     public function index() {
@@ -86,6 +91,7 @@ class Employee_portal extends CI_Controller {
     public function profile() {
         // Check if employee is logged in
         if (!$this->session->userdata('employee_logged_in')) {
+            log_message('warning', 'Unauthorized access attempt to profile');
             redirect('employee_portal');
         }
         
@@ -93,10 +99,12 @@ class Employee_portal extends CI_Controller {
         $employee = $this->Employee_model->get_employee($employee_id);
         
         if (!$employee) {
+            log_message('error', 'Employee not found for ID: ' . $employee_id . ' in profile');
             $this->session->unset_userdata(['employee_logged_in', 'employee_id', 'employee_name', 'employee_email', 'employee_cpf', 'employee_unit', 'employee_company', 'employee_position', 'employee_access_level']);
             redirect('employee_portal');
         }
         
+        log_message('info', 'Employee profile page loaded for ID: ' . $employee_id);
         $data['employee'] = $employee;
         $data['title'] = 'Employee Profile';
         
@@ -106,6 +114,7 @@ class Employee_portal extends CI_Controller {
     public function update_profile() {
         // Check if employee is logged in
         if (!$this->session->userdata('employee_logged_in')) {
+            log_message('warning', 'Unauthorized access attempt to update_profile');
             redirect('employee_portal');
         }
         
@@ -113,11 +122,13 @@ class Employee_portal extends CI_Controller {
         $employee = $this->Employee_model->get_employee($employee_id);
         
         if (!$employee) {
+            log_message('error', 'Employee not found for ID: ' . $employee_id . ' in update_profile');
             $this->session->unset_userdata(['employee_logged_in', 'employee_id', 'employee_name', 'employee_email', 'employee_cpf', 'employee_unit', 'employee_company', 'employee_position', 'employee_access_level']);
             redirect('employee_portal');
         }
         
         if ($this->input->post()) {
+            log_message('info', 'Update profile form submitted for employee ID: ' . $employee_id);
             $this->form_validation->set_rules('phone', 'Phone', 'required');
             
             if ($this->form_validation->run()) {
@@ -125,21 +136,32 @@ class Employee_portal extends CI_Controller {
                     'phone' => $this->input->post('phone')
                 );
                 
+                log_message('info', 'Form validation passed for employee ID: ' . $employee_id . ', phone: ' . $this->input->post('phone'));
+                
                 // Only update PINs if both are provided
                 if ($this->input->post('pin_4digit') && $this->input->post('pin_6digit')) {
                     $update_data['pin_4digit'] = $this->input->post('pin_4digit');
                     $update_data['pin_6digit'] = $this->input->post('pin_6digit');
+                    log_message('info', 'PINs will be updated for employee ID: ' . $employee_id);
+                } else {
+                    log_message('info', 'PINs not provided for employee ID: ' . $employee_id);
                 }
                 
                 if ($this->Employee_model->update_employee($employee_id, $update_data)) {
+                    log_message('info', 'Employee profile updated successfully for ID: ' . $employee_id);
                     $this->session->set_flashdata('toast_message', 'Profile updated successfully.');
                     $this->session->set_flashdata('toast_type', 'success');
                 } else {
+                    log_message('error', 'Failed to update employee profile for ID: ' . $employee_id);
                     $this->session->set_flashdata('toast_message', 'Error updating profile.');
                     $this->session->set_flashdata('toast_type', 'error');
                 }
                 
                 redirect('employee_portal/profile');
+            } else {
+                // Add validation errors to data
+                $data['validation_errors'] = validation_errors();
+                log_message('warning', 'Form validation failed for employee ID: ' . $employee_id . ' - Errors: ' . validation_errors());
             }
         }
         
@@ -152,6 +174,7 @@ class Employee_portal extends CI_Controller {
     public function capture_photo() {
         // Check if employee is logged in
         if (!$this->session->userdata('employee_logged_in')) {
+            log_message('warning', 'Unauthorized access attempt to capture_photo');
             redirect('employee_portal');
         }
         
@@ -159,10 +182,12 @@ class Employee_portal extends CI_Controller {
         $employee = $this->Employee_model->get_employee($employee_id);
         
         if (!$employee) {
+            log_message('error', 'Employee not found for ID: ' . $employee_id . ' in capture_photo');
             $this->session->unset_userdata(['employee_logged_in', 'employee_id', 'employee_name', 'employee_email', 'employee_cpf', 'employee_unit', 'employee_company', 'employee_position', 'employee_access_level']);
             redirect('employee_portal');
         }
         
+        log_message('info', 'Employee photo capture page loaded for ID: ' . $employee_id);
         $data['employee'] = $employee;
         $data['title'] = 'Capture Photo';
         
@@ -182,7 +207,10 @@ class Employee_portal extends CI_Controller {
         // Get the base64 image data
         $image_data = $this->input->post('image');
         
+        log_message('info', 'Photo save request received for employee ID: ' . $employee_id);
+        
         if (empty($image_data)) {
+            log_message('error', 'No image data received for employee ID: ' . $employee_id);
             $this->output->set_content_type('application/json');
             $this->output->set_output(json_encode(['success' => false, 'message' => 'No image data received']));
             return;
@@ -192,10 +220,13 @@ class Employee_portal extends CI_Controller {
         $image_data = str_replace('data:image/jpeg;base64,', '', $image_data);
         $image_data = str_replace(' ', '+', $image_data);
         
+        log_message('info', 'Image data processed, length: ' . strlen($image_data));
+        
         // Decode base64
         $image_data = base64_decode($image_data);
         
         if ($image_data === false) {
+            log_message('error', 'Failed to decode base64 image data for employee ID: ' . $employee_id);
             $this->output->set_content_type('application/json');
             $this->output->set_output(json_encode(['success' => false, 'message' => 'Invalid image data']));
             return;
@@ -204,13 +235,17 @@ class Employee_portal extends CI_Controller {
         // Validate image by re-encoding
         $image_info = getimagesizefromstring($image_data);
         if ($image_info === false) {
+            log_message('error', 'Invalid image format for employee ID: ' . $employee_id);
             $this->output->set_content_type('application/json');
             $this->output->set_output(json_encode(['success' => false, 'message' => 'Invalid image format']));
             return;
         }
         
+        log_message('info', 'Image validated - dimensions: ' . $image_info[0] . 'x' . $image_info[1] . ' for employee ID: ' . $employee_id);
+        
         // Check image dimensions (minimum 200x200, maximum 2000x2000)
         if ($image_info[0] < 200 || $image_info[1] < 200 || $image_info[0] > 2000 || $image_info[1] > 2000) {
+            log_message('error', 'Image dimensions out of range: ' . $image_info[0] . 'x' . $image_info[1] . ' for employee ID: ' . $employee_id);
             $this->output->set_content_type('application/json');
             $this->output->set_output(json_encode(['success' => false, 'message' => 'Image dimensions must be between 200x200 and 2000x2000 pixels']));
             return;
@@ -220,12 +255,26 @@ class Employee_portal extends CI_Controller {
         $filename = 'employee_' . $employee_id . '_' . time() . '.jpg';
         $upload_path = APPPATH . '../uploads/employee_photos/' . $filename;
         
+        log_message('info', 'Attempting to save image to: ' . $upload_path . ' for employee ID: ' . $employee_id);
+        
+        // Ensure upload directory exists
+        $upload_dir = dirname($upload_path);
+        if (!is_dir($upload_dir)) {
+            if (!mkdir($upload_dir, 0755, true)) {
+                log_message('error', 'Failed to create upload directory: ' . $upload_dir . ' for employee ID: ' . $employee_id);
+                $this->output->set_content_type('application/json');
+                $this->output->set_output(json_encode(['success' => false, 'message' => 'Error creating upload directory']));
+                return;
+            }
+        }
+        
         // Save the image
         if (file_put_contents($upload_path, $image_data)) {
             // Update employee record with photo path
             $photo_path = 'uploads/employee_photos/' . $filename;
             
             if ($this->Employee_model->update_photo($employee_id, $photo_path)) {
+                log_message('info', 'Employee photo updated successfully for ID: ' . $employee_id . ' at path: ' . $photo_path);
                 $this->output->set_content_type('application/json');
                 $this->output->set_output(json_encode([
                     'success' => true, 
@@ -233,12 +282,18 @@ class Employee_portal extends CI_Controller {
                     'photo_path' => $photo_path
                 ]));
             } else {
+                log_message('error', 'Failed to update employee photo in database for ID: ' . $employee_id);
+                // Delete the uploaded file if database update fails
+                if (file_exists($upload_path)) {
+                    unlink($upload_path);
+                }
                 $this->output->set_content_type('application/json');
                 $this->output->set_output(json_encode(['success' => false, 'message' => 'Error saving photo to database']));
             }
         } else {
+            log_message('error', 'Failed to save image file to: ' . $upload_path . ' for employee ID: ' . $employee_id);
             $this->output->set_content_type('application/json');
-            $this->output->set_output(json_encode(['success' => false, 'message' => 'Error saving photo file']));
+            $this->output->set_output(json_encode(['success' => false, 'message' => 'Error saving photo file. Check directory permissions.']));
         }
     }
     
