@@ -229,54 +229,116 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
+    <!-- Camera Utilities -->
+    <script src="<?php echo base_url('views/templates/camera-utils.js'); ?>"></script>
+    
     <script>
         let stream = null;
         let capturedImage = null;
 
-        // Initialize camera
+        // Enhanced camera initialization with mobile support
         async function initCamera() {
             try {
-                stream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { 
-                        width: { ideal: 640 },
-                        height: { ideal: 480 },
-                        facingMode: 'user'
-                    } 
+                // Check if getUserMedia is supported
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    throw new Error('Camera API not supported in this browser');
+                }
+
+                // Check if we're on HTTPS (required for camera on mobile)
+                if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+                    throw new Error('Camera access requires HTTPS on mobile devices');
+                }
+
+                // Request camera access with mobile-optimized constraints
+                const constraints = {
+                    video: {
+                        width: { ideal: 1280, min: 640 },
+                        height: { ideal: 720, min: 480 },
+                        facingMode: 'user',
+                        aspectRatio: { ideal: 16/9 }
+                    },
+                    audio: false
+                };
+
+                // Try to get user media
+                stream = await navigator.mediaDevices.getUserMedia(constraints);
+                
+                const video = document.getElementById('video');
+                video.srcObject = stream;
+                
+                // Wait for video to be ready
+                await new Promise((resolve) => {
+                    video.onloadedmetadata = () => {
+                        video.play();
+                        resolve();
+                    };
                 });
-                document.getElementById('video').srcObject = stream;
-            } catch (err) {
-                console.error('Error accessing camera:', err);
-                showStatus('Error accessing camera. Please ensure camera permissions are granted.', 'error');
+
+                showStatus('Camera initialized successfully!', 'success');
+                
+            } catch (error) {
+                console.error('Camera error:', error);
+                
+                let errorMessage = 'Error accessing camera: ';
+                
+                if (error.name === 'NotAllowedError') {
+                    errorMessage += 'Permission denied. Please allow camera access.';
+                } else if (error.name === 'NotFoundError') {
+                    errorMessage += 'No camera found on device.';
+                } else if (error.name === 'NotReadableError') {
+                    errorMessage += 'Camera is being used by another application.';
+                } else if (error.name === 'OverconstrainedError') {
+                    errorMessage += 'Camera configuration not supported.';
+                } else if (error.name === 'SecurityError') {
+                    errorMessage += 'Camera access blocked for security reasons.';
+                } else if (error.message.includes('HTTPS')) {
+                    errorMessage += 'Camera access requires HTTPS on mobile devices.';
+                } else {
+                    errorMessage += error.message || 'Unknown error.';
+                }
+                
+                showStatus(errorMessage, 'error');
             }
         }
 
-        // Capture photo
+        // Enhanced photo capture
         function capturePhoto() {
-            const video = document.getElementById('video');
-            const canvas = document.getElementById('canvas');
-            const preview = document.getElementById('photo-preview');
-            
-            // Set canvas dimensions to match video
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            
-            // Draw video frame to canvas
-            const context = canvas.getContext('2d');
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            
-            // Get image data
-            capturedImage = canvas.toDataURL('image/jpeg', 0.8);
-            
-            // Show preview
-            preview.src = capturedImage;
-            preview.style.display = 'block';
-            
-            // Show/hide buttons
-            document.getElementById('save-btn').style.display = 'inline-block';
-            document.getElementById('retake-btn').style.display = 'inline-block';
-            document.getElementById('capture-btn').style.display = 'none';
-            
-            showStatus('Photo captured! Review and save if satisfied.', 'success');
+            try {
+                const video = document.getElementById('video');
+                const canvas = document.getElementById('canvas');
+                const preview = document.getElementById('photo-preview');
+                
+                if (!stream || !video.videoWidth) {
+                    showStatus('Camera not ready. Please wait a moment.', 'warning');
+                    return;
+                }
+                
+                // Set canvas dimensions to match video
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                
+                // Draw video frame to canvas
+                const context = canvas.getContext('2d');
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                // Get image data
+                capturedImage = canvas.toDataURL('image/jpeg', 0.8);
+                
+                // Show preview
+                preview.src = capturedImage;
+                preview.style.display = 'block';
+                
+                // Show/hide buttons
+                document.getElementById('save-btn').style.display = 'inline-block';
+                document.getElementById('retake-btn').style.display = 'inline-block';
+                document.getElementById('capture-btn').style.display = 'none';
+                
+                showStatus('Photo captured! Review and save if satisfied.', 'success');
+                
+            } catch (error) {
+                console.error('Photo capture error:', error);
+                showStatus('Error capturing photo. Please try again.', 'error');
+            }
         }
 
         // Save photo

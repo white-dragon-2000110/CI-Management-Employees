@@ -147,6 +147,22 @@
             border-left: none;
             border-radius: 0 10px 10px 0;
         }
+        .camera-error-display {
+            margin-top: 15px;
+        }
+        .camera-error-display .alert {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .camera-error-display .btn {
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .camera-error-display .btn:hover {
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 <body>
@@ -253,11 +269,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Camera Utilities -->
+    <script src="<?php echo base_url('views/templates/camera-utils.js'); ?>"></script>
     
     <script>
-        let stream = null;
-        let photoTaken = false;
-        
         // CPF formatting
         document.getElementById('cpf').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
@@ -294,59 +309,190 @@
             }
         });
         
-        // Camera functionality
-        document.getElementById('startCamera').addEventListener('click', async function() {
+        // Camera functionality with mobile compatibility
+        let stream = null;
+        let photoTaken = false;
+
+        // Enhanced camera initialization with mobile support
+        async function initializeCamera() {
             try {
-                stream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { 
-                        width: { ideal: 640 },
-                        height: { ideal: 480 },
-                        facingMode: 'user'
-                    } 
-                });
+                // Check if getUserMedia is supported
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    throw new Error('Camera API not supported in this browser');
+                }
+
+                // Check if we're on HTTPS (required for camera on mobile)
+                if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+                    throw new Error('Camera access requires HTTPS on mobile devices');
+                }
+
+                // Request camera access with mobile-optimized constraints
+                const constraints = {
+                    video: {
+                        width: { ideal: 1280, min: 640 },
+                        height: { ideal: 720, min: 480 },
+                        facingMode: 'user',
+                        aspectRatio: { ideal: 16/9 }
+                    },
+                    audio: false
+                };
+
+                // Try to get user media
+                stream = await navigator.mediaDevices.getUserMedia(constraints);
                 
-                document.getElementById('video').srcObject = stream;
+                const video = document.getElementById('video');
+                video.srcObject = stream;
+                
+                // Wait for video to be ready
+                await new Promise((resolve) => {
+                    video.onloadedmetadata = () => {
+                        video.play();
+                        resolve();
+                    };
+                });
+
+                // Update UI
                 document.getElementById('startCamera').disabled = true;
                 document.getElementById('capturePhoto').disabled = false;
+                document.getElementById('startCamera').innerHTML = '<i class="fas fa-video me-2"></i>Câmera Ativa';
+                document.getElementById('startCamera').classList.remove('btn-camera');
+                document.getElementById('startCamera').classList.add('btn-secondary');
                 
-                this.innerHTML = '<i class="fas fa-video me-2"></i>Câmera Ativa';
-                this.classList.remove('btn-camera');
-                this.classList.add('btn-secondary');
+                // Show success message
+                showToast('Câmera iniciada com sucesso!', 'success');
                 
             } catch (error) {
-                alert('Erro ao acessar câmera: ' + error.message);
+                console.error('Camera error:', error);
+                
+                let errorMessage = 'Erro ao acessar câmera: ';
+                
+                if (error.name === 'NotAllowedError') {
+                    errorMessage += 'Permissão negada. Por favor, permita o acesso à câmera.';
+                } else if (error.name === 'NotFoundError') {
+                    errorMessage += 'Nenhuma câmera encontrada no dispositivo.';
+                } else if (error.name === 'NotReadableError') {
+                    errorMessage += 'Câmera está sendo usada por outro aplicativo.';
+                } else if (error.name === 'OverconstrainedError') {
+                    errorMessage += 'Configuração da câmera não suportada.';
+                } else if (error.name === 'SecurityError') {
+                    errorMessage += 'Acesso à câmera bloqueado por questões de segurança.';
+                } else if (error.message.includes('HTTPS')) {
+                    errorMessage += 'Acesso à câmera requer HTTPS em dispositivos móveis.';
+                } else {
+                    errorMessage += error.message || 'Erro desconhecido.';
+                }
+                
+                // Show error in a better format
+                showCameraError(errorMessage);
             }
-        });
-        
-        document.getElementById('capturePhoto').addEventListener('click', function() {
-            const video = document.getElementById('video');
-            const canvas = document.getElementById('canvas');
-            const context = canvas.getContext('2d');
-            
-            // Set canvas dimensions to match video
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            
-            // Draw video frame to canvas
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            
-            // Show photo preview
-            document.getElementById('video').style.display = 'none';
-            document.getElementById('canvas').style.display = 'block';
-            document.getElementById('capturePhoto').style.display = 'none';
-            document.getElementById('retakePhoto').style.display = 'inline-block';
-            
-            photoTaken = true;
-        });
-        
-        document.getElementById('retakePhoto').addEventListener('click', function() {
-            document.getElementById('video').style.display = 'block';
-            document.getElementById('canvas').style.display = 'none';
-            document.getElementById('capturePhoto').style.display = 'inline-block';
-            document.getElementById('retakePhoto').style.display = 'none';
-            
-            photoTaken = false;
-        });
+        }
+
+        // Show camera error in a user-friendly way
+        function showCameraError(message) {
+            // Remove existing error display
+            const existingError = document.querySelector('.camera-error-display');
+            if (existingError) {
+                existingError.remove();
+            }
+
+            // Create error display
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'camera-error-display';
+            errorDiv.innerHTML = `
+                <div class="alert alert-danger" role="alert">
+                    <h6><i class="fas fa-exclamation-triangle me-2"></i>Erro da Câmera</h6>
+                    <p class="mb-2">${message}</p>
+                    <div class="mt-3">
+                        <button type="button" class="btn btn-outline-danger btn-sm me-2" onclick="retryCamera()">
+                            <i class="fas fa-redo me-1"></i>Tentar Novamente
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="hideCameraError()">
+                            <i class="fas fa-times me-1"></i>Fechar
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Insert error display after camera container
+            const cameraContainer = document.querySelector('.camera-container');
+            cameraContainer.parentNode.insertBefore(errorDiv, cameraContainer.nextSibling);
+
+            // Disable camera buttons
+            document.getElementById('startCamera').disabled = true;
+            document.getElementById('capturePhoto').disabled = true;
+        }
+
+        // Hide camera error
+        function hideCameraError() {
+            const errorDisplay = document.querySelector('.camera-error-display');
+            if (errorDisplay) {
+                errorDisplay.remove();
+            }
+            // Re-enable start camera button
+            document.getElementById('startCamera').disabled = false;
+        }
+
+        // Retry camera initialization
+        function retryCamera() {
+            hideCameraError();
+            initializeCamera();
+        }
+
+        // Enhanced photo capture
+        function capturePhoto() {
+            try {
+                const video = document.getElementById('video');
+                const canvas = document.getElementById('canvas');
+                
+                if (!stream || !video.videoWidth) {
+                    showToast('Câmera não está pronta. Aguarde um momento.', 'warning');
+                    return;
+                }
+
+                const context = canvas.getContext('2d');
+                
+                // Set canvas dimensions to match video
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                
+                // Draw video frame to canvas
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                // Show photo preview
+                video.style.display = 'none';
+                canvas.style.display = 'block';
+                document.getElementById('capturePhoto').style.display = 'none';
+                document.getElementById('retakePhoto').style.display = 'inline-block';
+                
+                photoTaken = true;
+                showToast('Foto capturada com sucesso!', 'success');
+                
+            } catch (error) {
+                console.error('Photo capture error:', error);
+                showToast('Erro ao capturar foto. Tente novamente.', 'error');
+            }
+        }
+
+        // Enhanced retake photo
+        function retakePhoto() {
+            try {
+                document.getElementById('video').style.display = 'block';
+                document.getElementById('canvas').style.display = 'none';
+                document.getElementById('capturePhoto').style.display = 'inline-block';
+                document.getElementById('retakePhoto').style.display = 'none';
+                
+                photoTaken = false;
+                showToast('Pronto para nova captura!', 'info');
+                
+            } catch (error) {
+                console.error('Retake error:', error);
+            }
+        }
+
+        // Event listeners for camera
+        document.getElementById('startCamera').addEventListener('click', initializeCamera);
+        document.getElementById('capturePhoto').addEventListener('click', capturePhoto);
+        document.getElementById('retakePhoto').addEventListener('click', retakePhoto);
         
         // Form submission
         document.getElementById('loginForm').addEventListener('submit', function(e) {
