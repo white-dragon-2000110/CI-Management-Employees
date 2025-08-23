@@ -20,7 +20,7 @@ class Dashboard extends CI_Controller {
         $this->load->model('Employee_model');
         $this->load->model('Report_model');
         
-        $data['title'] = 'Dashboard';
+        $data['title'] = 'Painel de Controle';
         $data['employee_stats'] = $this->Employee_model->get_employee_stats();
         $data['alarm_stats'] = $this->Report_model->get_alarm_stats();
         $data['ticket_stats'] = $this->Report_model->get_ticket_stats();

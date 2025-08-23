@@ -2,10 +2,10 @@
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="h3 mb-0">
-                <i class="fas fa-user-plus me-2"></i>Add New Employee
+                <i class="fas fa-user-plus me-2"></i>Adicionar Novo Funcionário
             </h1>
             <a href="/employees" class="btn btn-secondary">
-                <i class="fas fa-arrow-left me-2"></i>Back to Employees
+                <i class="fas fa-arrow-left me-2"></i>Voltar aos Funcionários
             </a>
         </div>
     </div>
@@ -15,12 +15,12 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-user me-2"></i>Employee Information</h5>
+                <h5 class="mb-0"><i class="fas fa-user me-2"></i>Informações do Funcionário</h5>
             </div>
             <div class="card-body">
                 <?php if (validation_errors()): ?>
                     <div class="alert alert-danger">
-                        <i class="fas fa-exclamation-triangle me-2"></i>Please fix the following errors:
+                        <i class="fas fa-exclamation-triangle me-2"></i>Por favor, corrija os seguintes erros:
                         <?php echo validation_errors(); ?>
                     </div>
                 <?php endif; ?>
@@ -28,7 +28,7 @@
                 <form method="post" action="/employees/add">
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="name" class="form-label">Full Name *</label>
+                            <label for="name" class="form-label">Nome Completo *</label>
                             <input type="text" class="form-control" id="name" name="name" 
                                    value="<?php echo set_value('name'); ?>" required>
                         </div>
@@ -47,7 +47,7 @@
                                    value="<?php echo set_value('email'); ?>" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="phone" class="form-label">Phone *</label>
+                            <label for="phone" class="form-label">Telefone *</label>
                             <input type="text" class="form-control" id="phone" name="phone" 
                                    value="<?php echo set_value('phone'); ?>" required>
                         </div>
@@ -55,25 +55,25 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="position" class="form-label">Position *</label>
+                            <label for="position" class="form-label">Cargo *</label>
                             <input type="text" class="form-control" id="position" name="position" 
                                    value="<?php echo set_value('position'); ?>" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="access_level" class="form-label">Access Level</label>
+                            <label for="access_level" class="form-label">Nível de Acesso</label>
                             <select class="form-select" id="access_level" name="access_level">
-                                <option value="basic" <?php echo (set_value('access_level') === 'basic') ? 'selected' : ''; ?>>Basic</option>
-                                <option value="standard" <?php echo (set_value('access_level') === 'standard') ? 'selected' : ''; ?>>Standard</option>
-                                <option value="admin" <?php echo (set_value('access_level') === 'admin') ? 'selected' : ''; ?>>Admin</option>
+                                <option value="basic" <?php echo (set_value('access_level') === 'basic') ? 'selected' : ''; ?>>Básico</option>
+                                <option value="standard" <?php echo (set_value('access_level') === 'standard') ? 'selected' : ''; ?>>Padrão</option>
+                                <option value="admin" <?php echo (set_value('access_level') === 'admin') ? 'selected' : ''; ?>>Administrador</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="company_id" class="form-label">Company *</label>
+                            <label for="company_id" class="form-label">Empresa *</label>
                             <select class="form-select" id="company_id" name="company_id" required>
-                                <option value="">Select Company</option>
+                                <option value="">Selecionar Empresa</option>
                                 <?php foreach ($companies as $company): ?>
                                     <option value="<?php echo $company->id; ?>" <?php echo (set_value('company_id') == $company->id) ? 'selected' : ''; ?>>
                                         <?php echo $company->name; ?>
@@ -82,9 +82,9 @@
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="unit_id" class="form-label">Unit *</label>
+                            <label for="unit_id" class="form-label">Unidade *</label>
                             <select class="form-select" id="unit_id" name="unit_id" required>
-                                <option value="">Select Unit</option>
+                                <option value="">Selecionar Unidade</option>
                                 <?php foreach ($units as $unit): ?>
                                     <option value="<?php echo $unit->id; ?>" <?php echo (set_value('unit_id') == $unit->id) ? 'selected' : ''; ?>>
                                         <?php echo $unit->name; ?>
@@ -96,22 +96,22 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="pin_4digit" class="form-label">4-Digit PIN *</label>
+                            <label for="pin_4digit" class="form-label">PIN de 4 Dígitos *</label>
                             <input type="password" class="form-control" id="pin_4digit" name="pin_4digit" 
                                    maxlength="4" pattern="\d{4}" required>
-                            <small class="form-text text-muted">Enter a 4-digit numeric PIN</small>
+                            <small class="form-text text-muted">Digite um PIN numérico de 4 dígitos</small>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="pin_6digit" class="form-label">6-Digit PIN *</label>
+                            <label for="pin_6digit" class="form-label">PIN de 6 Dígitos *</label>
                             <input type="password" class="form-control" id="pin_6digit" name="pin_6digit" 
                                    maxlength="6" pattern="\d{6}" required>
-                            <small class="form-text text-muted">Enter a 6-digit numeric PIN</small>
+                            <small class="form-text text-muted">Digite um PIN numérico de 6 dígitos</small>
                         </div>
                     </div>
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save me-2"></i>Create Employee
+                            <i class="fas fa-save me-2"></i>Criar Funcionário
                         </button>
                     </div>
                 </form>
@@ -122,24 +122,24 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Information</h5>
+                <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Informações</h5>
             </div>
             <div class="card-body">
                 <div class="alert alert-info">
-                    <h6><i class="fas fa-shield-alt me-2"></i>Security Notes</h6>
+                    <h6><i class="fas fa-shield-alt me-2"></i>Notas de Segurança</h6>
                     <ul class="mb-0">
-                        <li>PINs are securely hashed</li>
-                        <li>CPF must be unique</li>
-                        <li>Email must be unique</li>
+                        <li>PINs são criptografados com segurança</li>
+                        <li>CPF deve ser único</li>
+                        <li>Email deve ser único</li>
                     </ul>
                 </div>
                 
                 <div class="alert alert-warning">
-                    <h6><i class="fas fa-exclamation-triangle me-2"></i>Important</h6>
+                    <h6><i class="fas fa-exclamation-triangle me-2"></i>Importante</h6>
                     <ul class="mb-0">
-                        <li>Employee will be set to 'active' status</li>
-                        <li>Access level determines permissions</li>
-                        <li>PINs cannot be recovered if lost</li>
+                        <li>Funcionário será definido como status 'ativo'</li>
+                        <li>Nível de acesso determina permissões</li>
+                        <li>PINs não podem ser recuperados se perdidos</li>
                     </ul>
                 </div>
             </div>
@@ -154,7 +154,7 @@ document.getElementById('company_id').addEventListener('change', function() {
     const unitSelect = document.getElementById('unit_id');
     
     // Clear current units
-    unitSelect.innerHTML = '<option value="">Select Unit</option>';
+    unitSelect.innerHTML = '<option value="">Selecionar Unidade</option>';
     
     if (companyId) {
         // Fetch units for selected company

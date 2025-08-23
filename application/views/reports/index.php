@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12">
         <h1 class="h3 mb-4">
-            <i class="fas fa-chart-bar me-2"></i>Reports Dashboard
+            <i class="fas fa-chart-bar me-2"></i>Painel de Relatórios
         </h1>
     </div>
 </div>
@@ -12,14 +12,14 @@
         <div class="card h-100">
             <div class="card-body text-center">
                 <i class="fas fa-exclamation-triangle fa-4x text-warning mb-3"></i>
-                <h4 class="card-title">Alarm Events</h4>
-                <p class="card-text">Generate detailed reports for security alarms and system events with advanced filtering options.</p>
+                <h4 class="card-title">Eventos de Alarme</h4>
+                <p class="card-text">Gere relatórios detalhados para alarmes de segurança e eventos do sistema com opções avançadas de filtragem.</p>
                 <div class="mt-3">
                     <a href="/reports/alarms" class="btn btn-warning me-2">
-                        <i class="fas fa-chart-line me-2"></i>View Report
+                        <i class="fas fa-chart-line me-2"></i>Ver Relatório
                     </a>
                     <a href="/reports/alarms?export=csv" class="btn btn-outline-warning">
-                        <i class="fas fa-download me-2"></i>Export CSV
+                        <i class="fas fa-download me-2"></i>Exportar CSV
                     </a>
                 </div>
             </div>
@@ -30,14 +30,14 @@
         <div class="card h-100">
             <div class="card-body text-center">
                 <i class="fas fa-ticket-alt fa-4x text-info mb-3"></i>
-                <h4 class="card-title">Support Tickets</h4>
-                <p class="card-text">Track and analyze support ticket performance, resolution times, and team productivity.</p>
+                <h4 class="card-title">Tickets de Suporte</h4>
+                <p class="card-text">Acompanhe e analise o desempenho dos tickets de suporte, tempos de resolução e produtividade da equipe.</p>
                 <div class="mt-3">
                     <a href="/reports/tickets" class="btn btn-info me-2">
-                        <i class="fas fa-chart-bar me-2"></i>View Report
+                        <i class="fas fa-chart-bar me-2"></i>Ver Relatório
                     </a>
                     <a href="/reports/tickets?export=csv" class="btn btn-outline-info">
-                        <i class="fas fa-download me-2"></i>Export CSV
+                        <i class="fas fa-download me-2"></i>Exportar CSV
                     </a>
                 </div>
             </div>
@@ -52,9 +52,9 @@
         <div class="card border-0 shadow-sm alarm-card">
             <div class="card-header bg-gradient-warning text-white border-0">
                 <h5 class="mb-0">
-                    <i class="fas fa-exclamation-triangle me-2"></i>Alarm Events Overview
+                    <i class="fas fa-exclamation-triangle me-2"></i>Visão Geral dos Eventos de Alarme
                 </h5>
-                <small class="opacity-75">Security and system monitoring insights</small>
+                <small class="opacity-75">Insights de segurança e monitoramento do sistema</small>
             </div>
             <div class="card-body p-4">
                 <div class="row text-center mb-4">
@@ -64,7 +64,7 @@
                                 <i class="fas fa-shield-alt"></i>
                             </div>
                             <h3 class="stat-number text-primary"><?php echo $alarm_stats['total']; ?></h3>
-                            <small class="stat-label">Total Alarms</small>
+                            <small class="stat-label">Total de Alarmes</small>
                         </div>
                     </div>
                     <div class="col-4">
@@ -73,7 +73,7 @@
                                 <i class="fas fa-exclamation-circle"></i>
                             </div>
                             <h3 class="stat-number text-warning"><?php echo count($alarm_stats['by_severity']); ?></h3>
-                            <small class="stat-label">Severity Levels</small>
+                            <small class="stat-label">Níveis de Severidade</small>
                         </div>
                     </div>
                     <div class="col-4">
@@ -82,7 +82,7 @@
                                 <i class="fas fa-list-alt"></i>
                             </div>
                             <h3 class="stat-number text-info"><?php echo count($alarm_stats['by_status']); ?></h3>
-                            <small class="stat-label">Status Types</small>
+                            <small class="stat-label">Tipos de Status</small>
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                 <!-- <?php if (!empty($alarm_stats['by_severity'])): ?>
                     <div class="severity-breakdown">
                         <h6 class="text-muted mb-3">
-                            <i class="fas fa-chart-pie me-2"></i>By Severity
+                            <i class="fas fa-chart-pie me-2"></i>Por Severidade
                         </h6>
                         <?php foreach ($alarm_stats['by_severity'] as $severity): ?>
                             <div class="severity-item">

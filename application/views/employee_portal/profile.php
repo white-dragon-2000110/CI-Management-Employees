@@ -107,8 +107,8 @@
                 <div class="col-md-8">
                     <div class="profile-card">
                         <div class="profile-header">
-                            <h1><i class="fas fa-user-circle me-3"></i>Employee Profile</h1>
-                            <p class="mb-0">Welcome to your secure employee portal</p>
+                            <h1><i class="fas fa-user-circle me-3"></i>Perfil do Funcionário</h1>
+                            <p class="mb-0">Bem-vindo ao seu portal seguro de funcionário</p>
                         </div>
                         
                         <div class="profile-body">
@@ -125,7 +125,7 @@
                             <div class="row mb-4">
                                 <div class="col-md-6">
                                     <div class="info-row">
-                                        <span class="info-label">Full Name:</span>
+                                        <span class="info-label">Nome Completo:</span>
                                         <span class="info-value"><?php echo $employee->name; ?></span>
                                     </div>
                                     <div class="info-row">
@@ -137,21 +137,21 @@
                                         <span class="info-value"><?php echo $employee->email; ?></span>
                                     </div>
                                     <div class="info-row">
-                                        <span class="info-label">Phone:</span>
+                                        <span class="info-label">Telefone:</span>
                                         <span class="info-value"><?php echo $employee->phone; ?></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="info-row">
-                                        <span class="info-label">Position:</span>
+                                        <span class="info-label">Cargo:</span>
                                         <span class="info-value"><?php echo $employee->position; ?></span>
                                     </div>
                                     <div class="info-row">
-                                        <span class="info-label">Unit:</span>
+                                        <span class="info-label">Unidade:</span>
                                         <span class="info-value"><?php echo $employee->unit_name; ?></span>
                                     </div>
                                     <div class="info-row">
-                                        <span class="info-label">Company:</span>
+                                        <span class="info-label">Empresa:</span>
                                         <span class="info-value"><?php echo $employee->company_name; ?></span>
                                     </div>
                                     <div class="info-row">
@@ -167,7 +167,7 @@
                             <div class="text-center mb-4">
                                 <div class="alert alert-info">
                                     <i class="fas fa-shield-alt me-2"></i>
-                                    <strong>Access Level:</strong> <?php echo ucfirst($employee->access_level); ?>
+                                    <strong>Nível de Acesso:</strong> <?php echo ucfirst($employee->access_level); ?>
                                 </div>
                             </div>
                             
@@ -175,12 +175,12 @@
                             <div class="row mb-4">
                                 <div class="col-md-6 mb-3">
                                     <a href="/employee_portal/update_profile" class="btn-portal w-100 text-center">
-                                        <i class="fas fa-edit me-2"></i>Update Profile
+                                        <i class="fas fa-edit me-2"></i>Atualizar Perfil
                                     </a>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <a href="/employee_portal/capture_photo" class="btn-portal w-100 text-center">
-                                        <i class="fas fa-camera me-2"></i>Update Photo
+                                        <i class="fas fa-camera me-2"></i>Atualizar Foto
                                     </a>
                                 </div>
                             </div>
@@ -188,9 +188,9 @@
                             <!-- Photo Section -->
                             <?php if ($employee->photo_path): ?>
                                 <div class="text-center mb-4">
-                                    <h5><i class="fas fa-camera me-2"></i>Current Photo</h5>
+                                    <h5><i class="fas fa-camera me-2"></i>Foto Atual</h5>
                                     <img src="/<?php echo $employee->photo_path; ?>" 
-                                         alt="Employee Photo" 
+                                         alt="Foto do Funcionário" 
                                          class="img-fluid rounded" 
                                          style="max-width: 200px; border: 3px solid #3498db;">
                                 </div>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($title) ? $title . ' - ' : ''; ?>Employee Management System</title>
+    <title><?php echo isset($title) ? $title . ' - ' : ''; ?>Sistema de Gestão de Funcionários</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -825,10 +825,10 @@
         // Get title for toast type
         getTitle(type) {
             const titles = {
-                success: 'Success!',
-                error: 'Error!',
-                warning: 'Warning!',
-                info: 'Information'
+                success: 'Sucesso!',
+                error: 'Erro!',
+                warning: 'Aviso!',
+                info: 'Informação'
             };
             return titles[type] || titles.info;
         }
@@ -932,7 +932,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="/dashboard">
-                <i class="fas fa-users me-2"></i>EMS
+                <i class="fas fa-users me-2"></i>SGF
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -943,22 +943,22 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link <?php echo (strpos(current_url(), 'dashboard') !== false) ? 'active' : ''; ?>" href="/dashboard">
-                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                            <i class="fas fa-tachometer-alt me-1"></i>Painel de Controle
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo (strpos(current_url(), 'employees') !== false) ? 'active' : ''; ?>" href="/employees">
-                            <i class="fas fa-users me-1"></i>Employees
+                            <i class="fas fa-users me-1"></i>Funcionários
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo (strpos(current_url(), 'reports') !== false) ? 'active' : ''; ?>" href="/reports">
-                            <i class="fas fa-chart-bar me-1"></i>Reports
+                            <i class="fas fa-chart-bar me-1"></i>Relatórios
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo (strpos(current_url(), 'employee_portal') !== false) ? 'active' : ''; ?>" href="/employee_portal" target="_blank">
-                            <i class="fas fa-user-circle me-1"></i>Employee Portal
+                            <i class="fas fa-user-circle me-1"></i>Portal do Funcionário
                         </a>
                     </li>
                 </ul>
@@ -966,10 +966,10 @@
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user me-1"></i><?php echo $this->session->userdata('user_name') ?: 'User'; ?>
+                            <i class="fas fa-user me-1"></i><?php echo $this->session->userdata('user_name') ?: 'Usuário'; ?>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/auth/logout"><i class="fas fa-sign-out-alt me-1 z-index"></i>Logout</a></li>
+                            <li><a class="dropdown-item" href="/auth/logout"><i class="fas fa-sign-out-alt me-1 z-index"></i>Sair</a></li>
                         </ul>
                     </li>
                 </ul>

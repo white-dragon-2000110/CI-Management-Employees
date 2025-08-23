@@ -18,7 +18,7 @@ class Reports extends CI_Controller {
     }
     
     public function index() {
-        $data['title'] = 'Reports Dashboard';
+        $data['title'] = 'Painel de Relatórios';
         $data['alarm_stats'] = $this->Report_model->get_alarm_stats();
         $data['ticket_stats'] = $this->Report_model->get_ticket_stats();
         

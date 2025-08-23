@@ -2,10 +2,10 @@
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="h3 mb-0">
-                <i class="fas fa-users me-2"></i>Employee Management
+                <i class="fas fa-users me-2"></i>Gestão de Funcionários
             </h1>
             <a href="/employees/add" class="btn btn-primary">
-                <i class="fas fa-user-plus me-2"></i>Add Employee
+                <i class="fas fa-user-plus me-2"></i>Adicionar Funcionário
             </a>
         </div>
     </div>
@@ -40,7 +40,7 @@
         <div class="card text-center">
             <div class="card-body">
                 <h4 class="card-title text-success"><?php echo $stats['active']; ?></h4>
-                <p class="card-text text-muted">Active</p>
+                <p class="card-text text-muted">Ativos</p>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
         <div class="card text-center">
             <div class="card-body">
                 <h4 class="card-title text-warning"><?php echo $stats['vacation']; ?></h4>
-                <p class="card-text text-muted">Vacation</p>
+                <p class="card-text text-muted">Férias</p>
             </div>
         </div>
     </div>
@@ -56,7 +56,7 @@
         <div class="card text-center">
             <div class="card-body">
                 <h4 class="card-title text-danger"><?php echo $stats['blocked']; ?></h4>
-                <p class="card-text text-muted">Blocked</p>
+                <p class="card-text text-muted">Bloqueados</p>
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
         <div class="card text-center">
             <div class="card-body">
                 <h4 class="card-title text-secondary"><?php echo $stats['inactive']; ?></h4>
-                <p class="card-text text-muted">Inactive</p>
+                <p class="card-text text-muted">Inativos</p>
             </div>
         </div>
     </div>
@@ -73,31 +73,31 @@
 <!-- Filters -->
 <div class="card mb-4">
     <div class="card-header">
-        <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Filters</h5>
+        <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Filtros</h5>
     </div>
     <div class="card-body">
         <form method="get" action="/employees">
             <div class="row">
                 <div class="col-md-3 mb-3">
-                    <label for="search" class="form-label">Search</label>
+                    <label for="search" class="form-label">Pesquisar</label>
                     <input type="text" class="form-control" id="search" name="search" 
                            value="<?php echo isset($filters['search']) ? $filters['search'] : ''; ?>" 
-                           placeholder="Name, email, CPF...">
+                           placeholder="Nome, email, CPF...">
                 </div>
                 <div class="col-md-2 mb-3">
                     <label for="status" class="form-label">Status</label>
                     <select class="form-select" id="status" name="status">
-                        <option value="">All Status</option>
-                        <option value="active" <?php echo (isset($filters['status']) && $filters['status'] === 'active') ? 'selected' : ''; ?>>Active</option>
-                        <option value="vacation" <?php echo (isset($filters['status']) && $filters['status'] === 'vacation') ? 'selected' : ''; ?>>Vacation</option>
-                        <option value="blocked" <?php echo (isset($filters['status']) && $filters['status'] === 'blocked') ? 'selected' : ''; ?>>Blocked</option>
-                        <option value="inactive" <?php echo (isset($filters['status']) && $filters['status'] === 'inactive') ? 'selected' : ''; ?>>Inactive</option>
+                        <option value="">Todos os Status</option>
+                        <option value="active" <?php echo (isset($filters['status']) && $filters['status'] === 'active') ? 'selected' : ''; ?>>Ativo</option>
+                        <option value="vacation" <?php echo (isset($filters['status']) && $filters['status'] === 'vacation') ? 'selected' : ''; ?>>Férias</option>
+                        <option value="blocked" <?php echo (isset($filters['status']) && $filters['status'] === 'blocked') ? 'selected' : ''; ?>>Bloqueado</option>
+                        <option value="inactive" <?php echo (isset($filters['status']) && $filters['status'] === 'inactive') ? 'selected' : ''; ?>>Inativo</option>
                     </select>
                 </div>
                 <div class="col-md-2 mb-3">
-                    <label for="company_id" class="form-label">Company</label>
+                    <label for="company_id" class="form-label">Empresa</label>
                     <select class="form-select" id="company_id" name="company_id">
-                        <option value="">All Companies</option>
+                        <option value="">Todas as Empresas</option>
                         <?php foreach ($companies as $company): ?>
                             <option value="<?php echo $company->id; ?>" <?php echo (isset($filters['company_id']) && $filters['company_id'] == $company->id) ? 'selected' : ''; ?>>
                                 <?php echo $company->name; ?>
@@ -106,9 +106,9 @@
                     </select>
                 </div>
                 <div class="col-md-2 mb-3">
-                    <label for="unit_id" class="form-label">Unit</label>
+                    <label for="unit_id" class="form-label">Unidade</label>
                     <select class="form-select" id="unit_id" name="unit_id">
-                        <option value="">All Units</option>
+                        <option value="">Todas as Unidades</option>
                         <?php foreach ($units as $unit): ?>
                             <option value="<?php echo $unit->id; ?>" <?php echo (isset($filters['unit_id']) && $filters['unit_id'] == $unit->id) ? 'selected' : ''; ?>>
                                 <?php echo $unit->name; ?>
@@ -118,10 +118,10 @@
                 </div>
                 <div class="col-md-3 mb-3 d-flex align-items-end">
                     <button type="submit" class="btn btn-primary me-2">
-                        <i class="fas fa-search me-2"></i>Filter
+                        <i class="fas fa-search me-2"></i>Filtrar
                     </button>
                     <a href="/employees" class="btn btn-secondary me-2">
-                        <i class="fas fa-times me-2"></i>Clear
+                        <i class="fas fa-times me-2"></i>Limpar
                     </a>
                 </div>
             </div>
@@ -132,28 +132,28 @@
 <!-- Employees Table -->
 <div class="card">
     <div class="card-header">
-        <h5 class="mb-0"><i class="fas fa-list me-2"></i>Employees</h5>
+        <h5 class="mb-0"><i class="fas fa-list me-2"></i>Funcionários</h5>
     </div>
     <div class="card-body">
         <?php if (empty($employees)): ?>
             <div class="text-center py-4">
                 <i class="fas fa-users fa-3x text-muted mb-3"></i>
-                <h5 class="text-muted">No employees found</h5>
-                <p class="text-muted">Try adjusting your filters or add a new employee.</p>
+                <h5 class="text-muted">Nenhum funcionário encontrado</h5>
+                <p class="text-muted">Tente ajustar seus filtros ou adicione um novo funcionário.</p>
             </div>
         <?php else: ?>
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Nome</th>
                             <th>CPF</th>
                             <th>Email</th>
-                            <th>Position</th>
-                            <th>Unit</th>
-                            <th>Company</th>
+                            <th>Cargo</th>
+                            <th>Unidade</th>
+                            <th>Empresa</th>
                             <th>Status</th>
-                            <th>Actions</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -161,7 +161,7 @@
                             <tr>
                                 <td>
                                     <strong><?php echo $employee->name; ?></strong>
-                                    <br><small class="text-muted"><?php echo ucfirst($employee->access_level); ?> Access</small>
+                                    <br><small class="text-muted"><?php echo ucfirst($employee->access_level); ?> Acesso</small>
                                 </td>
                                 <td><?php echo $employee->cpf; ?></td>
                                 <td><?php echo $employee->email; ?></td>
@@ -175,29 +175,29 @@
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a href="/employees/view/<?php echo $employee->id; ?>" class="btn btn-sm btn-outline-primary" title="View">
+                                        <a href="/employees/view/<?php echo $employee->id; ?>" class="btn btn-sm btn-outline-primary" title="Visualizar">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="/employees/edit/<?php echo $employee->id; ?>" class="btn btn-sm btn-outline-warning" title="Edit">
+                                        <a href="/employees/edit/<?php echo $employee->id; ?>" class="btn btn-sm btn-outline-warning" title="Editar">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <button type="button" class="btn btn-sm btn-outline-danger" title="Delete" 
+                                        <button type="button" class="btn btn-sm btn-outline-danger" title="Excluir" 
                                                 onclick="showDeleteModalAjax(<?php echo $employee->id; ?>)">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                         <?php if ($employee->status === 'active'): ?>
-                                            <a href="/employees/block/<?php echo $employee->id; ?>" class="btn btn-sm btn-outline-danger pt-2" title="Block">
+                                            <a href="/employees/block/<?php echo $employee->id; ?>" class="btn btn-sm btn-outline-danger pt-2" title="Bloquear">
                                                 <i class="fas fa-ban"></i>
                                             </a>
-                                            <a href="/employees/vacation/<?php echo $employee->id; ?>" class="btn btn-sm btn-outline-info" title="Set Vacation">
+                                            <a href="/employees/vacation/<?php echo $employee->id; ?>" class="btn btn-sm btn-outline-info" title="Definir Férias">
                                                 <i class="fas fa-umbrella-beach"></i>
                                             </a>
                                         <?php elseif ($employee->status === 'blocked'): ?>
-                                            <a href="/employees/unblock/<?php echo $employee->id; ?>" class="btn btn-sm btn-outline-success" title="Unblock">
+                                            <a href="/employees/unblock/<?php echo $employee->id; ?>" class="btn btn-sm btn-outline-success" title="Desbloquear">
                                                 <i class="fas fa-check"></i>
                                             </a>
                                         <?php elseif ($employee->status === 'vacation'): ?>
-                                            <a href="/employees/end_vacation/<?php echo $employee->id; ?>" class="btn btn-sm btn-outline-success" title="End Vacation">
+                                            <a href="/employees/end_vacation/<?php echo $employee->id; ?>" class="btn btn-sm btn-outline-success" title="Encerrar Férias">
                                                 <i class="fas fa-undo"></i>
                                             </a>
                                         <?php endif; ?>
@@ -219,7 +219,7 @@ document.getElementById('company_id').addEventListener('change', function() {
     const unitSelect = document.getElementById('unit_id');
     
     // Clear current units
-    unitSelect.innerHTML = '<option value="">All Units</option>';
+    unitSelect.innerHTML = '<option value="">Todas as Unidades</option>';
     
     if (companyId) {
         // Fetch units for selected company
@@ -300,7 +300,7 @@ function showDeleteModalAjax(employeeId) {
                         <div class="spinner-border text-primary" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
-                        <p class="mt-3 mb-0">Loading delete confirmation...</p>
+                        <p class="mt-3 mb-0">Carregando confirmação de exclusão...</p>
                     </div>
                 </div>
             </div>
@@ -374,15 +374,15 @@ function showDeleteModalAjax(employeeId) {
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header bg-danger text-white">
-                                <h5 class="modal-title">Error</h5>
+                                <h5 class="modal-title">Erro</h5>
                                 <button type="button" class="btn-close btn-close-white" onclick="closeErrorModal()"></button>
                             </div>
                             <div class="modal-body text-center py-4">
                                 <i class="fas fa-exclamation-circle fa-3x text-danger mb-3"></i>
-                                <p>Failed to load delete confirmation. Please try again.</p>
+                                <p>Falha ao carregar confirmação de exclusão. Por favor, tente novamente.</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" onclick="closeErrorModal()">Close</button>
+                                <button type="button" class="btn btn-secondary" onclick="closeErrorModal()">Fechar</button>
                             </div>
                         </div>
                     </div>
@@ -439,7 +439,7 @@ function setupModalEventListeners(modal) {
             e.stopPropagation();
             
             // Show confirmation
-            if (confirm('Are you absolutely sure you want to delete this employee? This action cannot be undone.')) {
+            if (confirm('Tem certeza absoluta que deseja excluir este funcionário? Esta ação não pode ser desfeita.')) {
                 // Submit the form
                 this.submit();
             }

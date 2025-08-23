@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -129,34 +129,34 @@
 <body>
     <div class="login-container">
         <div class="login-header">
-            <h1>Welcome Back</h1>
-            <p>Please sign in to your account</p>
+            <h1>Bem-vindo de Volta</h1>
+            <p>Por favor, faça login na sua conta</p>
         </div>
 
         <!-- Toast notifications will be displayed automatically -->
 
         <form method="POST" action="/auth/login">
             <div class="form-group">
-                <label for="email">Email Address</label>
+                <label for="email">Endereço de Email</label>
                 <input type="email" id="email" name="email" required>
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Senha</label>
                 <input type="password" id="password" name="password" required>
             </div>
 
-            <button type="submit" class="login-btn">Sign In</button>
+            <button type="submit" class="login-btn">Entrar</button>
         </form>
 
         <div class="register-link">
-            <p>Don't have an account? <a href="/auth/register">Sign up here</a></p>
+            <p>Não tem uma conta? <a href="/auth/register">Cadastre-se aqui</a></p>
         </div>
 
         <div class="demo-credentials">
-            <strong>Demo Credentials:</strong><br>
-            Email: admin@example.com<br>
-            Password: admin123
+            <strong>Credenciais de Demonstração:</strong><br>
+            Email: admin@exemplo.com<br>
+            Senha: admin123
         </div>
     </div>
 </body>

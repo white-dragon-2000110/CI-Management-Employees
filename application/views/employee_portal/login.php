@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -153,8 +153,8 @@
     <div class="login-container">
         <div class="login-card">
             <div class="login-header">
-                <h1><i class="fas fa-user-circle me-3"></i>Employee Portal</h1>
-                <p class="mb-0">Secure Access with Dual PIN Authentication</p>
+                <h1><i class="fas fa-user-circle me-3"></i>Portal do Funcionário</h1>
+                <p class="mb-0">Acesso Seguro com Autenticação de PIN Duplo</p>
             </div>
             
             <div class="login-body">
@@ -162,11 +162,11 @@
                 
                 <div class="row">
                     <div class="col-md-6">
-                        <h4 class="mb-4 text-center">Authentication</h4>
+                        <h4 class="mb-4 text-center">Autenticação</h4>
                         
                         <form method="post" id="loginForm">
                             <div class="mb-3">
-                                <label for="cpf" class="form-label">CPF Number</label>
+                                <label for="cpf" class="form-label">Número do CPF</label>
                                 <div class="input-group">
                                     <span class="input-group-text">
                                         <i class="fas fa-id-card"></i>
@@ -174,45 +174,45 @@
                                     <input type="text" class="form-control" id="cpf" name="cpf" 
                                            placeholder="000.000.000-00" required 
                                            pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
-                                           title="Please enter CPF in format: 000.000.000-00">
+                                           title="Por favor, digite o CPF no formato: 000.000.000-00">
                                 </div>
                                 <div id="cpfInfo" class="mt-2" style="display: none;"></div>
                             </div>
                             
                             <div class="mb-3">
-                                <label for="pin_4digit" class="form-label">4-Digit PIN</label>
+                                <label for="pin_4digit" class="form-label">PIN de 4 Dígitos</label>
                                 <div class="input-group">
                                     <span class="input-group-text">
                                         <i class="fas fa-lock"></i>
                                     </span>
                                     <input type="password" class="form-control" id="pin_4digit" name="pin_4digit" 
                                            placeholder="1234" required maxlength="4" pattern="\d{4}"
-                                           title="Please enter a 4-digit PIN">
+                                           title="Por favor, digite um PIN de 4 dígitos">
                                 </div>
                             </div>
                             
                             <div class="mb-4">
-                                <label for="pin_6digit" class="form-label">6-Digit PIN</label>
+                                <label for="pin_6digit" class="form-label">PIN de 6 Dígitos</label>
                                 <div class="input-group">
                                     <span class="input-group-text">
                                         <i class="fas fa-shield-alt"></i>
                                     </span>
                                     <input type="password" class="form-control" id="pin_6digit" name="pin_6digit" 
                                            placeholder="123456" required maxlength="6" pattern="\d{6}"
-                                           title="Please enter a 6-digit PIN">
+                                           title="Por favor, digite um PIN de 6 dígitos">
                                 </div>
                             </div>
                             
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-login">
-                                    <i class="fas fa-sign-in-alt me-2"></i>Login
+                                    <i class="fas fa-sign-in-alt me-2"></i>Entrar
                                 </button>
                             </div>
                         </form>
                     </div>
                     
                     <div class="col-md-6">
-                        <h4 class="mb-4 text-center">Live Photo Capture</h4>
+                        <h4 class="mb-4 text-center">Captura de Foto ao Vivo</h4>
                         
                         <div class="camera-section">
                             <div class="camera-container">
@@ -221,18 +221,18 @@
                                 
                                 <div class="camera-controls">
                                     <button type="button" class="btn btn-camera" id="startCamera">
-                                        <i class="fas fa-camera me-2"></i>Start Camera
+                                        <i class="fas fa-camera me-2"></i>Iniciar Câmera
                                     </button>
                                     <button type="button" class="btn btn-camera" id="capturePhoto" disabled>
-                                        <i class="fas fa-camera-retro me-2"></i>Capture
+                                        <i class="fas fa-camera-retro me-2"></i>Capturar
                                     </button>
                                     <button type="button" class="btn btn-camera" id="retakePhoto" style="display: none;">
-                                        <i class="fas fa-redo me-2"></i>Retake
+                                        <i class="fas fa-redo me-2"></i>Nova Foto
                                     </button>
                                 </div>
                                 
                                 <div class="photo-preview" id="photoPreview">
-                                    <p class="text-center text-muted mb-2">Photo Preview</p>
+                                    <p class="text-center text-muted mb-2">Prévia da Foto</p>
                                 </div>
                             </div>
                         </div>
@@ -240,7 +240,7 @@
                         <div class="text-center mt-3">
                             <small class="text-muted">
                                 <i class="fas fa-info-circle me-1"></i>
-                                Photo capture is required for security verification
+                                A captura de foto é obrigatória para verificação de segurança
                             </small>
                         </div>
                     </div>
@@ -285,7 +285,7 @@
                         cpfInfo.innerHTML = `
                             <div class="alert alert-warning alert-sm mb-0">
                                 <i class="fas fa-exclamation-triangle me-1"></i>
-                                CPF not found in system
+                                CPF não encontrado no sistema
                             </div>
                         `;
                         cpfInfo.style.display = 'block';
@@ -309,12 +309,12 @@
                 document.getElementById('startCamera').disabled = true;
                 document.getElementById('capturePhoto').disabled = false;
                 
-                this.innerHTML = '<i class="fas fa-video me-2"></i>Camera Active';
+                this.innerHTML = '<i class="fas fa-video me-2"></i>Câmera Ativa';
                 this.classList.remove('btn-camera');
                 this.classList.add('btn-secondary');
                 
             } catch (error) {
-                alert('Error accessing camera: ' + error.message);
+                alert('Erro ao acessar câmera: ' + error.message);
             }
         });
         
@@ -352,7 +352,7 @@
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             if (!photoTaken) {
                 e.preventDefault();
-                alert('Please capture a photo before logging in.');
+                alert('Por favor, capture uma foto antes de fazer login.');
                 return;
             }
             

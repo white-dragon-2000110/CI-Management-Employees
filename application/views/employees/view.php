@@ -158,7 +158,7 @@
                     <?php endif; ?>
                     
                     <a href="/employee_portal/login" target="_blank" class="btn btn-outline-primary">
-                        <i class="fas fa-external-link-alt me-2"></i>Employee Portal
+                        <i class="fas fa-external-link-alt me-2"></i>Portal do Funcionário
                     </a>
                 </div>
             </div>

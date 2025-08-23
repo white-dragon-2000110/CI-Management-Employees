@@ -29,7 +29,7 @@ class Employee_portal extends CI_Controller {
             redirect('employee_portal/profile');
         }
         
-        $data['title'] = 'Employee Portal - Login';
+        $data['title'] = 'Portal do Funcionário - Login';
         $data['error'] = '';
         
         if ($this->input->post()) {

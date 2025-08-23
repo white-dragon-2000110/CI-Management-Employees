@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -142,45 +142,45 @@
 <body>
     <div class="register-container">
         <div class="register-header">
-            <h1>Create Account</h1>
-            <p>Join us today and get started</p>
+            <h1>Criar Conta</h1>
+            <p>Junte-se a nós hoje e comece</p>
         </div>
 
         <!-- Toast notifications will be displayed automatically -->
 
         <form method="POST" action="/auth/register">
             <div class="form-group">
-                <label for="name">Full Name</label>
+                <label for="name">Nome Completo</label>
                 <input type="text" id="name" name="name" required>
             </div>
 
             <div class="form-group">
-                <label for="email">Email Address</label>
+                <label for="email">Endereço de Email</label>
                 <input type="email" id="email" name="email" required>
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Senha</label>
                 <input type="password" id="password" name="password" required>
             </div>
 
             <div class="form-group">
-                <label for="confirm_password">Confirm Password</label>
+                <label for="confirm_password">Confirmar Senha</label>
                 <input type="password" id="confirm_password" name="confirm_password" required>
             </div>
 
-            <button type="submit" class="register-btn">Create Account</button>
+            <button type="submit" class="register-btn">Criar Conta</button>
         </form>
 
         <div class="login-link">
-            <p>Already have an account? <a href="/auth/login">Sign in here</a></p>
+            <p>Já tem uma conta? <a href="/auth/login">Faça login aqui</a></p>
         </div>
 
         <div class="password-requirements">
-            <strong>Password Requirements:</strong>
+            <strong>Requisitos da Senha:</strong>
             <ul>
-                <li>At least 6 characters long</li>
-                <li>Passwords must match</li>
+                <li>Pelo menos 6 caracteres</li>
+                <li>As senhas devem coincidir</li>
             </ul>
         </div>
     </div>
