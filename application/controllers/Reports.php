@@ -61,7 +61,7 @@ class Reports extends CI_Controller {
         $data['companies'] = $this->Report_model->get_companies();
         $data['units'] = $this->Report_model->get_units();
         $data['filters'] = $filters;
-        $data['title'] = 'Alarm Events Report';
+        $data['title'] = 'Relatório de Eventos de Alarme';
         
         // Handle export
         if ($this->input->get('export') === 'csv') {
@@ -105,7 +105,7 @@ class Reports extends CI_Controller {
         $data['companies'] = $this->Report_model->get_companies();
         $data['units'] = $this->Report_model->get_units();
         $data['filters'] = $filters;
-        $data['title'] = 'Support Tickets Report';
+        $data['title'] = 'Relatório de Tickets de Suporte';
         
         // Handle export
         if ($this->input->get('export') === 'csv') {

@@ -117,9 +117,9 @@
         <div class="card border-0 shadow-sm ticket-card">
             <div class="card-header bg-gradient-info text-white border-0">
                 <h5 class="mb-0">
-                    <i class="fas fa-ticket-alt me-2"></i>Support Tickets Overview
+                    <i class="fas fa-ticket-alt me-2"></i>Visão Geral dos Tickets de Suporte
                 </h5>
-                <small class="opacity-75">Customer support performance metrics</small>
+                <small class="opacity-75">Métricas de desempenho do suporte ao cliente</small>
             </div>
             <div class="card-body p-4">
                 <div class="row text-center mb-4">
@@ -129,7 +129,7 @@
                                 <i class="fas fa-ticket-alt"></i>
                             </div>
                             <h3 class="stat-number text-primary"><?php echo $ticket_stats['total']; ?></h3>
-                            <small class="stat-label">Total Tickets</small>
+                            <small class="stat-label">Total de Tickets</small>
                         </div>
                     </div>
                     <div class="col-4">
@@ -138,7 +138,7 @@
                                 <i class="fas fa-flag"></i>
                             </div>
                             <h3 class="stat-number text-warning"><?php echo count($ticket_stats['by_priority']); ?></h3>
-                            <small class="stat-label">Priority Levels</small>
+                            <small class="stat-label">Níveis de Prioridade</small>
                         </div>
                     </div>
                     <div class="col-4">
@@ -147,7 +147,7 @@
                                 <i class="fas fa-tasks"></i>
                             </div>
                             <h3 class="stat-number text-info"><?php echo count($ticket_stats['by_status']); ?></h3>
-                            <small class="stat-label">Status Types</small>
+                            <small class="stat-label">Tipos de Status</small>
                         </div>
                     </div>
                 </div>
@@ -201,9 +201,9 @@
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-gradient-primary text-white border-0">
                 <h5 class="mb-0">
-                    <i class="fas fa-rocket me-2"></i>Quick Actions
+                    <i class="fas fa-rocket me-2"></i>Ações Rápidas
                 </h5>
-                <small class="opacity-75">Access key system features instantly</small>
+                <small class="opacity-75">Acesse recursos principais do sistema instantaneamente</small>
             </div>
             <div class="card-body p-4">
                 <div class="row g-3">
@@ -213,8 +213,8 @@
                                 <div class="quick-action-icon bg-warning">
                                     <i class="fas fa-exclamation-triangle"></i>
                                 </div>
-                                <h6 class="quick-action-title">Alarm Reports</h6>
-                                <p class="quick-action-desc">View detailed alarm analytics</p>
+                                <h6 class="quick-action-title">Relatórios de Alarme</h6>
+                                <p class="quick-action-desc">Visualizar análises detalhadas de alarmes</p>
                                 <div class="quick-action-arrow">
                                     <i class="fas fa-arrow-right"></i>
                                 </div>
@@ -228,8 +228,8 @@
                                 <div class="quick-action-icon bg-info">
                                     <i class="fas fa-ticket-alt"></i>
                                 </div>
-                                <h6 class="quick-action-title">Ticket Reports</h6>
-                                <p class="quick-action-desc">Support ticket insights</p>
+                                <h6 class="quick-action-title">Relatórios de Tickets</h6>
+                                <p class="quick-action-desc">Insights dos tickets de suporte</p>
                                 <div class="quick-action-arrow">
                                     <i class="fas fa-arrow-right"></i>
                                 </div>
@@ -243,8 +243,8 @@
                                 <div class="quick-action-icon bg-primary">
                                     <i class="fas fa-users"></i>
                                 </div>
-                                <h6 class="quick-action-title">Employee Management</h6>
-                                <p class="quick-action-desc">Manage team members</p>
+                                <h6 class="quick-action-title">Gestão de Funcionários</h6>
+                                <p class="quick-action-desc">Gerenciar membros da equipe</p>
                                 <div class="quick-action-arrow">
                                     <i class="fas fa-arrow-right"></i>
                                 </div>
@@ -258,8 +258,8 @@
                                 <div class="quick-action-icon bg-secondary">
                                     <i class="fas fa-tachometer-alt"></i>
                                 </div>
-                                <h6 class="quick-action-title">Dashboard</h6>
-                                <p class="quick-action-desc">System overview</p>
+                                <h6 class="quick-action-title">Painel de Controle</h6>
+                                <p class="quick-action-desc">Visão geral do sistema</p>
                                 <div class="quick-action-arrow">
                                     <i class="fas fa-arrow-right"></i>
                                 </div>

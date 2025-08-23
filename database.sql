@@ -67,9 +67,9 @@ CREATE TABLE `alarm_events`  (
 -- ----------------------------
 -- Records of alarm_events
 -- ----------------------------
-INSERT INTO `alarm_events` VALUES (1, 'system_failure', 'high', 'Database connection timeout', 1, 1, 'resolved', NULL, NULL, NULL, '2025-08-19 22:35:39');
-INSERT INTO `alarm_events` VALUES (2, 'security_breach', 'critical', 'Unauthorized access attempt', 1, 1, 'resolved', NULL, NULL, NULL, '2025-08-19 22:35:39');
-INSERT INTO `alarm_events` VALUES (3, 'maintenance', 'medium', 'Printer not responding', 2, 1, 'open', NULL, NULL, NULL, '2025-08-19 22:35:39');
+INSERT INTO `alarm_events` VALUES (1, 'system_failure', 'high', 'Timeout de conexão com banco de dados', 1, 1, 'resolved', NULL, NULL, NULL, '2025-08-19 22:35:39');
+INSERT INTO `alarm_events` VALUES (2, 'security_breach', 'critical', 'Tentativa de acesso não autorizado', 1, 1, 'resolved', NULL, NULL, NULL, '2025-08-19 22:35:39');
+INSERT INTO `alarm_events` VALUES (3, 'maintenance', 'medium', 'Impressora não responde', 2, 1, 'open', NULL, NULL, NULL, '2025-08-19 22:35:39');
 
 -- ----------------------------
 -- Table structure for companies
@@ -88,10 +88,10 @@ CREATE TABLE `companies`  (
 -- ----------------------------
 -- Records of companies
 -- ----------------------------
-INSERT INTO `companies` VALUES (1, 'Tech Solutions Inc.', 'TSI', 'active', '2025-08-19 22:35:39');
-INSERT INTO `companies` VALUES (2, 'Global Industries', 'GI', 'active', '2025-08-19 22:35:39');
-INSERT INTO `companies` VALUES (3, 'Innovation Corp', 'IC', 'active', '2025-08-19 22:35:39');
-INSERT INTO `companies` VALUES (4, 'TechCorp Solutions', '', 'active', '2025-08-20 01:25:33');
+INSERT INTO `companies` VALUES (1, 'Soluções Tecnológicas Ltda.', 'STL', 'active', '2025-08-19 22:35:39');
+INSERT INTO `companies` VALUES (2, 'Indústrias Globais Ltda.', 'IGL', 'active', '2025-08-19 22:35:39');
+INSERT INTO `companies` VALUES (3, 'Corporação de Inovação Ltda.', 'CIL', 'active', '2025-08-19 22:35:39');
+INSERT INTO `companies` VALUES (4, 'Soluções TechCorp Ltda.', 'STC', 'active', '2025-08-20 01:25:33');
 
 -- ----------------------------
 -- Table structure for employee_photos
@@ -218,9 +218,9 @@ CREATE TABLE `support_tickets`  (
 -- ----------------------------
 -- Records of support_tickets
 -- ----------------------------
-INSERT INTO `support_tickets` VALUES (1, 'Email System Access Issue', 'Users unable to access shared drives', 'high', 'in_progress', 1, 1, NULL, NULL, NULL, '2025-08-19 22:35:39', '2025-08-20 01:50:33');
-INSERT INTO `support_tickets` VALUES (2, 'Printer Network Problem', 'Need to renew Office 365 licenses', 'medium', 'open', 2, 1, NULL, NULL, NULL, '2025-08-19 22:35:39', '2025-08-20 01:50:34');
-INSERT INTO `support_tickets` VALUES (3, 'Software License Renewal', 'Request for new laptops for development team', 'low', 'open', 1, 1, NULL, NULL, NULL, '2025-08-19 22:35:39', '2025-08-20 01:50:34');
+INSERT INTO `support_tickets` VALUES (1, 'Problema de Acesso ao Sistema de Email', 'Usuários não conseguem acessar unidades compartilhadas', 'high', 'in_progress', 1, 1, NULL, NULL, NULL, '2025-08-19 22:35:39', '2025-08-20 01:50:33');
+INSERT INTO `support_tickets` VALUES (2, 'Problema de Rede da Impressora', 'Necessário renovar licenças do Office 365', 'medium', 'open', 2, 1, NULL, NULL, NULL, '2025-08-19 22:35:39', '2025-08-20 01:50:34');
+INSERT INTO `support_tickets` VALUES (3, 'Renovação de Licença de Software', 'Solicitação de novos laptops para equipe de desenvolvimento', 'low', 'open', 1, 1, NULL, NULL, NULL, '2025-08-19 22:35:39', '2025-08-20 01:50:34');
 
 -- ----------------------------
 -- Table structure for units
@@ -241,10 +241,10 @@ CREATE TABLE `units`  (
 -- ----------------------------
 -- Records of units
 -- ----------------------------
-INSERT INTO `units` VALUES (1, 'IT Department', 'IT', 1, 'active', '2025-08-19 22:35:39');
-INSERT INTO `units` VALUES (2, 'HR Department', 'HR', 1, 'active', '2025-08-19 22:35:39');
-INSERT INTO `units` VALUES (3, 'Operations', 'OPS', 2, 'active', '2025-08-19 22:35:39');
-INSERT INTO `units` VALUES (4, 'Research & Development', 'RND', 3, 'active', '2025-08-19 22:35:39');
+INSERT INTO `units` VALUES (1, 'Departamento de TI', 'TI', 1, 'active', '2025-08-19 22:35:39');
+INSERT INTO `units` VALUES (2, 'Departamento de RH', 'RH', 1, 'active', '2025-08-19 22:35:39');
+INSERT INTO `units` VALUES (3, 'Operações', 'OPS', 2, 'active', '2025-08-19 22:35:39');
+INSERT INTO `units` VALUES (4, 'Pesquisa e Desenvolvimento', 'P&D', 3, 'active', '2025-08-19 22:35:39');
 
 -- ----------------------------
 -- Table structure for users

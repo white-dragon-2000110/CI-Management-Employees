@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <span class="text-muted">Employee Management System &copy; 2024</span>
+                    <span class="text-muted">Sistema de Gestão de Funcionários &copy; 2024</span>
                 </div>
                 <div class="col-md-6 text-end">
                     <span class="text-muted">Powered by CodeIgniter 3</span>
